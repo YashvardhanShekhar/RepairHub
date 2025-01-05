@@ -1,11 +1,11 @@
 "use client";
 import "./page.css";
 import { useState, useEffect } from "react";
-import Login from "./components/login/page.js";
-import { useSession, signIn, signOut } from "next-auth/react";
+import Login from "../components/login/page.js";
 import Link from "next/link";
-
-export default function Home() {
+import { useSession, signIn, signOut } from "next-auth/react";
+const page = () => {
+  let [search, setSearch] = useState("");
   const { data: session } = useSession();
 
   function handleLoginState() {
@@ -15,6 +15,10 @@ export default function Home() {
 
   const handleLogout = async () => {
     await signOut();
+  };
+
+  const handleSearchChange = (ev) => {
+    setSearch(ev.target.value);
   };
 
   useEffect(() => {
@@ -39,43 +43,37 @@ export default function Home() {
           <div className="nav__header">
             <div className="nav__logo">
               <a href="#" className="logo">
-                <h4> Repair Hub </h4>
+                Repair Hub
               </a>
             </div>
             <div className="nav__menu__btn" id="menu-btn">
               <i className="ri-menu-line"></i>
             </div>
           </div>
+
+          {/* <div className="nav__search">
+            <input
+              type="text"
+              onChange={(ev) => {
+                handleSearchChange(ev);
+              }}
+              value={search}
+              placeholder="Search..."
+            />
+          </div> */}
+
           <ul className="nav__links" id="nav-links">
             <li>
-              <a href="#home">
-                {" "}
-                <p> Home </p>{" "}
-              </a>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <a href="#about">
-                {" "}
-                <p> About </p>{" "}
-              </a>
-            </li>
-            <li>
-              <a href="#product">
-                {" "}
-                <p> Services </p>{" "}
-              </a>
-            </li>
-            <li>
-              <a href="#contact">
-                {" "}
-                <p> Contact </p>{" "}
-              </a>
+              <a href="#contact">Contact</a>
             </li>
             {session && (
               <li>
                 <a onClick={handleLogout} href="#signout">
                   {" "}
-                  <p> Sign Out </p>
+                  Sign Out{" "}
                 </a>
               </li>
             )}
@@ -83,113 +81,15 @@ export default function Home() {
               <li>
                 <a onClick={handleLoginState} href="#signin">
                   {" "}
-                  <p> Sign In </p>
+                  Sign In{" "}
                 </a>
               </li>
             )}
           </ul>
         </nav>
 
-        <header className="section__container header__container" id="home">
-          <div className="header__image">
-            <img
-              src="https://images.pexels.com/photos/29955109/pexels-photo-29955109.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="header"
-            />
-          </div>
-          <div className="header__content">
-            <div>
-              <h1>Hassle-Free Home Repairs</h1>
-              <p>
-                Because <b> {session ? `${session.user.name}` : `You`} </b>{" "}
-                {session ? `Deserves` : `Deserve`} Peace of Mind.
-                <br />
-                Trusted by Homeowners
-              </p>
-            </div>
-          </div>
-        </header>
-
-        <section className="section__container deals__container">
-          <div className="deals__card">
-            <h2 className="section__header">Hot 🔥 deals for you</h2>
-          </div>
-          <div className="deals__card">
-            <span>
-              <i className="ri-cash-line"></i>
-            </span>
-            <h4>Seasonal Discounts</h4>
-            <p>Get 20% off on all repair services this winter!</p>
-          </div>
-          <div className="deals__card">
-            <span>
-              <i className="ri-calendar-schedule-line"></i>
-            </span>
-            <h4>First-Time User Offers</h4>
-            <p>Sign up today and get 10% off your first service!</p>
-          </div>
-          <div className="deals__card">
-            <span>
-              <i className="ri-money-rupee-circle-line"></i>
-            </span>
-            <h4>Save money</h4>
-            <p>Discover unbeatable prices and save big money!</p>
-          </div>
-        </section>
-
-        <section className="section__container about__container" id="about">
-          <div className="about__header">
-            <div>
-              <h2 className="section__header">About us</h2>
-              <p className="section__description">
-                Our passion for exceptional craftsmanship drives us to curate
-                the best pieces for every room in your house.
-              </p>
-            </div>
-          </div>
-          <div className="about__content">
-            <div className="about__grid">
-              <div className="about__card">
-                <h3>1.</h3>
-                <h4>Who we are</h4>
-                <p>
-                  We are a platform that simplifies home repair by connecting
-                  homeowners with trusted professionals.
-                </p>
-              </div>
-              <div className="about__card">
-                <h3>2.</h3>
-                <h4>What do we do</h4>
-                <p>
-                  Our platform provides quick access to reliable repair experts
-                  for plumbing, electrical, and appliance issues.
-                </p>
-              </div>
-              <div className="about__card">
-                <h3>3.</h3>
-                <h4>How do we help</h4>
-                <p>
-                  Instant connections to nearby professionals. Verified experts
-                  with transparent pricing. Real-time availability and customer
-                  reviews for informed choices.
-                </p>
-              </div>
-              <div className="about__card">
-                <h3>4.</h3>
-                <h4>Create success story</h4>
-                <p>
-                  We transform repair hassles into seamless experiences, helping
-                  homeowners save time, money, and stress. Join us and create
-                  your success story!
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="section__container product__container" id="product">
           <h2 className="section__header">Services</h2>
-
           <div className="product__grid">
             <Link href="/services/view/677a487e30c98a3804c9d406">
               <div className="product__card">
@@ -218,11 +118,86 @@ export default function Home() {
                 />
               </div>
             </Link>
-            <Link href="services">
-              <button className="button-57" role="button">
-                <span className="text">More Services..</span>
-                <span>Click Here!!</span>
-              </button>
+            <Link href="/services/view/67777a395929c81184548b2a">
+              <div className="product__card">
+                <h4>Refrigerator Repair</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_231,dpr_2,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/supply/customer-app-supply/1700137613735-a7d95a.jpeg"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a48dd30c98a3804c9d409">
+              <div className="product__card">
+                <h4>Cupboard Hinge Installation</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1653892249137-8848bb.png"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a48f130c98a3804c9d40a">
+              <div className="product__card">
+                <h4>Tap Repair</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1652172643970-9ad67b.png"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a491b30c98a3804c9d40b">
+              <div className="product__card">
+                <h4>Geyser Installation</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/supply/customer-app-supply/1701149716857-c1a5e4.jpeg"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a5cdc30c98a3804c9d411">
+              <div className="product__card">
+                <h4>Jet Spray Installation/repair</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1653890923765-57dea3.png"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a492a30c98a3804c9d40c">
+              <div className="product__card">
+                <h4>Door Lock Repair</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1653918245354-14a137.png"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a493930c98a3804c9d40d">
+              <div className="product__card">
+                <h4>Switchboard Repair</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1653632250914-ca15c6.png"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a5c7030c98a3804c9d410">
+              <div className="product__card">
+                <h4>Drill & Hang(wall decor)</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/supply/customer-app-supply/1727776710805-0ce8d7.jpeg"
+                  alt="product"
+                />
+              </div>
+            </Link>
+            <Link href="/services/view/677a497130c98a3804c9d40e">
+              <div className="product__card">
+                <h4>Flush Tank Repair</h4>
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template/w_233,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1653632276897-4194e1.png"
+                  alt="product"
+                />
+              </div>
             </Link>
           </div>
         </section>
@@ -231,9 +206,9 @@ export default function Home() {
           <div className="section__container footer__container">
             <div className="footer__col">
               <div className="footer__logo">
-                <a href="#" className="logo">
+                <Link href="/" className="logo">
                   Repair Hub
-                </a>
+                </Link>
               </div>
               <p>Where reliable solutions meet your doorstep.</p>
               <ul className="footer__socials">
@@ -325,4 +300,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default page;
