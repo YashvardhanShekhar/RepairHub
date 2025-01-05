@@ -216,7 +216,7 @@ async function Page({ params }) {
   const { id } = await params;
 
   // Fetch data during server-side rendering
-  const res = await fetch(`http://localhost:3000/api/services/${id}`);
+  const res = await fetch(`${process.env.URL}/api/services/${id}`);
   const data = await res.json();
   const service = data.service;
 

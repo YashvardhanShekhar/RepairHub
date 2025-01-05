@@ -5,7 +5,7 @@ import "./style.css";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 const logIn = ({ handleLoginState }) => {
-  const URL = "http://localhost:3000/";
+  const URL = process.env.URL;
 
   const { data: session } = useSession();
 
