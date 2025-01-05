@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Login from "./components/login/page.js";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import Script from "next/script";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -323,6 +324,11 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      <Script src="https://unpkg.com/scrollreveal"/>
+          <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"/>
+          <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          <Script src="main.js"/>
     </>
   );
 }
