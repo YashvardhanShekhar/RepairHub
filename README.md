@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RepairHub
+
+RepairHub is a platform designed to simplify home repairs by connecting homeowners with trusted professionals. We offer a seamless experience with reliable repair services for plumbing, electrical issues, appliance repairs, and more. Our goal is to provide verified experts with transparent pricing and real-time availability, ensuring peace of mind for every homeowner.
+
+## Features
+
+- **Hassle-free Home Repairs**: Quick access to trusted repair professionals.
+- **Transparent Pricing**: No hidden costs.
+- **Real-Time Availability**: Instant booking options.
+- **Verified Experts**: Only the best professionals with customer reviews.
+
+## Services
+
+- Microwave Repair
+- Washing Machine Repair
+- Water Purifier Repair
+- More services available on the platform
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository**  
+   `git clone https://github.com/YashvardhanShekhar/RepairHub/`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# RepairHub
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+RepairHub is an online platform that connects homeowners with reliable repair service providers. The app offers services such as appliance repair, plumbing, electrical services, and more, ensuring homeowners can find trusted professionals when they need them most.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Quick access to repair services
+- Transparent pricing and real-time availability
+- Verified professionals with ratings and reviews
+- Easy booking and management
 
-## Learn More
+## Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository**  
+   `git clone https://github.com/YashvardhanShekhar/RepairHub/`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies**
+ Run the following command to install the necessary dependencies:
+   ```bash
+   npm install
+   # or
+   npm i
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Set up environment variables**  
+In the root directory, create a `.env.local` file with the following variables:
+- `GOOGLE_ID`: Google OAuth Client ID
+- `GOOGLE_SECRET`: Google OAuth Client Secret
+- `MONGODB_URI`: MongoDB connection string
+- `URL`: Application URL
+- `AUTH_SECRET`: Authentication secret key
 
-## Deploy on Vercel
+4. **Run the development server**
+  Start the server locally:
+   ```bash
+   npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open your browser and navigate to `http://localhost:3000` to see the project in action.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+This project is deployed on Vercel.
+Check out the live demo at [RepairHub](https://repairhub-nine.vercel.app/).
+To deploy on Vercel, follow their [deployment guide](https://vercel.com/docs).
+
+## Technologies Used
+
+- **Next.js**: React framework for server-side rendering
+- **React**: JavaScript library for building user interfaces
+- **Vercel**: Deployment platform
+
+## License
+
+This project is licensed under the MIT License.

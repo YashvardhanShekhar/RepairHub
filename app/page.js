@@ -5,6 +5,8 @@ import Login from "./components/login/page.js";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Script from "next/script";
+import Navbar from "./components/navbar/navbar.js";
+import Footer from "./components/footer/footer";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -36,60 +38,8 @@ export default function Home() {
       {loginState && <Login handleLoginState={handleLoginState} />}
 
       <div className="wholeBody">
-        <nav>
-          <div className="nav__header">
-            <div className="nav__logo">
-              <a href="#" className="logo">
-                <h4> Repair Hub </h4>
-              </a>
-            </div>
-            <div className="nav__menu__btn" id="menu-btn">
-              <i className="ri-menu-line"></i>
-            </div>
-          </div>
-          <ul className="nav__links" id="nav-links">
-            <li>
-              <a href="#home">
-                {" "}
-                <p> Home </p>{" "}
-              </a>
-            </li>
-            <li>
-              <a href="#about">
-                {" "}
-                <p> About </p>{" "}
-              </a>
-            </li>
-            <li>
-              <a href="#product">
-                {" "}
-                <p> Services </p>{" "}
-              </a>
-            </li>
-            <li>
-              <a href="#contact">
-                {" "}
-                <p> Contact </p>{" "}
-              </a>
-            </li>
-            {session && (
-              <li>
-                <a onClick={handleLogout} href="#signout">
-                  {" "}
-                  <p> Sign Out </p>
-                </a>
-              </li>
-            )}
-            {!session && (
-              <li>
-                <a onClick={handleLoginState} href="#signin">
-                  {" "}
-                  <p> Sign In </p>
-                </a>
-              </li>
-            )}
-          </ul>
-        </nav>
+        
+        <Navbar handleLoginState={handleLoginState} />
 
         <header className="section__container header__container" id="home">
           <div className="header__image">
@@ -228,101 +178,8 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="footer" id="contact">
-          <div className="section__container footer__container">
-            <div className="footer__col">
-              <div className="footer__logo">
-                <a href="#" className="logo">
-                  Repair Hub
-                </a>
-              </div>
-              <p>Where reliable solutions meet your doorstep.</p>
-              <ul className="footer__socials">
-                <li>
-                  <a href="#">
-                    <i className="ri-facebook-fill"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="ri-twitter-fill"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="ri-linkedin-fill"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__col">
-              <h4>Services</h4>
-              <ul className="footer__links">
-                <li>
-                  <a href="#">Contact Us</a>
-                </li>
-                <li>
-                  <a href="#">Press</a>
-                </li>
-                <li>
-                  <a href="#">Payrol</a>
-                </li>
-                <li>
-                  <a href="#">Library</a>
-                </li>
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Help Center</a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__col">
-              <h4>Resources</h4>
-              <ul className="footer__links">
-                <li>
-                  <a href="#">Pricing</a>
-                </li>
-                <li>
-                  <a href="#">FAQs</a>
-                </li>
-                <li>
-                  <a href="#">Contact Support</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#">Terms</a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__col">
-              <h4>Support</h4>
-              <ul className="footer__links">
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-                <li>
-                  <a href="#">Affiliates</a>
-                </li>
-                <li>
-                  <a href="#">Sitemap</a>
-                </li>
-                <li>
-                  <a href="#">Cancelation Policy</a>
-                </li>
-                <li>
-                  <a href="#">Security</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer__bar">
-            Copyright © 2024 Repair Hub. All rights reserved.
-          </div>
-        </footer>
+        <Footer/>
+        
       </div>
 
       <Script src="https://unpkg.com/scrollreveal"/>

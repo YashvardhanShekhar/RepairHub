@@ -1,8 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from 'next/script';
+import Script from "next/script";
 import "./globals.css";
 import SessionWrapper from "./components/SessionWrapper";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +19,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
   return (
     <html lang="en">
       <head>
@@ -32,22 +30,34 @@ export default function RootLayout({ children }) {
         />
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
         />
         <link
           rel="shortcut icon"
           type="repair-icon"
           href="https://images.pexels.com/photos/29995524/pexels-photo-29995524.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
         <title>Repair Hub</title>
       </head>
       <SessionWrapper>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           {children}
-          <Script src="https://unpkg.com/scrollreveal"/>
-          <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"/>
-          <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-          <Script src="main.js"/>
+          <Script src="https://unpkg.com/scrollreveal" />
+          <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" />
+          <Script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+          />
+          <Script src="main.js" />
         </body>
       </SessionWrapper>
     </html>

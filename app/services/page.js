@@ -4,18 +4,19 @@ import { useState, useEffect } from "react";
 import Login from "../components/login/page.js";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Navbar from "../components/navbar/navbar";
+import Footer from "../components/footer/footer";
+
 const page = () => {
+
   let [search, setSearch] = useState("");
+
   const { data: session } = useSession();
 
   function handleLoginState() {
     setLoginState(!loginState);
   }
   let [loginState, setLoginState] = useState(false);
-
-  const handleLogout = async () => {
-    await signOut();
-  };
 
   const handleSearchChange = (ev) => {
     setSearch(ev.target.value);
@@ -39,54 +40,8 @@ const page = () => {
       {loginState && <Login handleLoginState={handleLoginState} />}
 
       <div className="wholeBody">
-        <nav>
-          <div className="nav__header">
-            <div className="nav__logo">
-              <a href="#" className="logo">
-                Repair Hub
-              </a>
-            </div>
-            <div className="nav__menu__btn" id="menu-btn">
-              <i className="ri-menu-line"></i>
-            </div>
-          </div>
 
-          {/* <div className="nav__search">
-            <input
-              type="text"
-              onChange={(ev) => {
-                handleSearchChange(ev);
-              }}
-              value={search}
-              placeholder="Search..."
-            />
-          </div> */}
-
-          <ul className="nav__links" id="nav-links">
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-            {session && (
-              <li>
-                <a onClick={handleLogout} href="#signout">
-                  {" "}
-                  Sign Out{" "}
-                </a>
-              </li>
-            )}
-            {!session && (
-              <li>
-                <a onClick={handleLoginState} href="#signin">
-                  {" "}
-                  Sign In{" "}
-                </a>
-              </li>
-            )}
-          </ul>
-        </nav>
+        <Navbar handleLoginState={handleLoginState} />
 
         <section className="section__container product__container" id="product">
           <h2 className="section__header">Services</h2>
@@ -202,101 +157,8 @@ const page = () => {
           </div>
         </section>
 
-        <footer className="footer" id="contact">
-          <div className="section__container footer__container">
-            <div className="footer__col">
-              <div className="footer__logo">
-                <Link href="/" className="logo">
-                  Repair Hub
-                </Link>
-              </div>
-              <p>Where reliable solutions meet your doorstep.</p>
-              <ul className="footer__socials">
-                <li>
-                  <a href="#">
-                    <i className="ri-facebook-fill"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="ri-twitter-fill"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="ri-linkedin-fill"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__col">
-              <h4>Services</h4>
-              <ul className="footer__links">
-                <li>
-                  <a href="#">Contact Us</a>
-                </li>
-                <li>
-                  <a href="#">Press</a>
-                </li>
-                <li>
-                  <a href="#">Payrol</a>
-                </li>
-                <li>
-                  <a href="#">Library</a>
-                </li>
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Help Center</a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__col">
-              <h4>Resources</h4>
-              <ul className="footer__links">
-                <li>
-                  <a href="#">Pricing</a>
-                </li>
-                <li>
-                  <a href="#">FAQs</a>
-                </li>
-                <li>
-                  <a href="#">Contact Support</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#">Terms</a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer__col">
-              <h4>Support</h4>
-              <ul className="footer__links">
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-                <li>
-                  <a href="#">Affiliates</a>
-                </li>
-                <li>
-                  <a href="#">Sitemap</a>
-                </li>
-                <li>
-                  <a href="#">Cancelation Policy</a>
-                </li>
-                <li>
-                  <a href="#">Security</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer__bar">
-            Copyright © 2024 Repair Hub. All rights reserved.
-          </div>
-        </footer>
+        <Footer />
+
       </div>
     </>
   );

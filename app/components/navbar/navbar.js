@@ -1,45 +1,64 @@
-/**
- * The function defines a React component for a navigation bar with links and a login button.
- * @returns The `navbar` component is being returned. It is a functional React component that renders a
- * navigation bar with links for Home, About, Services, Contact, and Login. The `handleLoginState`
- * function is passed as a prop to handle the login action when the "Login" link is clicked.
- */
 
 "use client";
 import React from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import "./navbar.css";
 
 const navbar = ({ handleLoginState }) => {
+  
+  const { data: session } = useSession();
+
+  const handleLogout = async () => {
+    await signOut();
+  };
+
   return (
     <nav>
-      <div class="nav__header">
-        <div class="nav__logo">
-          <a href="#" class="logo">
-            Repair Hub
+      <div className="nav__header">
+        <div className="nav__logo">
+          <a href="#" className="logo">
+            <h4> Repair Hub </h4>
           </a>
         </div>
-        <div class="nav__menu__btn" id="menu-btn">
-          <i class="ri-menu-line"></i>
+        <div className="nav__menu__btn" id="menu-btn">
+          <i className="ri-menu-line"></i>
         </div>
       </div>
-      <ul class="nav__links" id="nav-links">
+      <ul className="nav__links" id="nav-links">
         <li>
-          <a href="#home">Home</a>
-        </li>
-        <li>
-          <a href="#about">About</a>
-        </li>
-        <li>
-          <a href="#product">Services</a>
-        </li>
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
-        <li>
-          <a onClick={handleLoginState} href="#">
-            Login
+          <a href="/">
+            {" "}
+            <p> Home </p>{" "}
           </a>
         </li>
+        <li>
+          <a href="/services">
+            {" "}
+            <p> Services </p>{" "}
+          </a>
+        </li>
+        <li>
+          <a href="#contact">
+            {" "}
+            <p> Contact </p>{" "}
+          </a>
+        </li>
+        {session && (
+          <li>
+            <a onClick={handleLogout} href="#signout">
+              {" "}
+              <p> Sign Out </p>
+            </a>
+          </li>
+        )}
+        {!session && (
+          <li>
+            <a onClick={handleLoginState} href="#signin">
+              {" "}
+              <p> Sign In </p>
+            </a>
+          </li>
+        )}
       </ul>
     </nav>
   );
