@@ -21,22 +21,6 @@ RepairHub is a platform designed to simplify home repairs by connecting homeowne
 1. **Clone the repository**  
    `git clone https://github.com/YashvardhanShekhar/RepairHub/`
 
-# RepairHub
-
-RepairHub is an online platform that connects homeowners with reliable repair service providers. The app offers services such as appliance repair, plumbing, electrical services, and more, ensuring homeowners can find trusted professionals when they need them most.
-
-## Features
-
-- Quick access to repair services
-- Transparent pricing and real-time availability
-- Verified professionals with ratings and reviews
-- Easy booking and management
-
-## Getting Started
-
-1. **Clone the repository**  
-   `git clone https://github.com/YashvardhanShekhar/RepairHub/`
-
 2. **Install dependencies**
  Run the following command to install the necessary dependencies:
    ```bash
@@ -62,7 +46,7 @@ Open your browser and navigate to `http://localhost:3000` to see the project in 
 ## Deployment
 
 This project is deployed on Vercel.
-Check out the live demo at [RepairHub](https://repairhub-nine.vercel.app/).
+Check out the live demo at [RepairHub](https://fixmate-24x7.vercel.app/).
 To deploy on Vercel, follow their [deployment guide](https://vercel.com/docs).
 
 ## Technologies Used

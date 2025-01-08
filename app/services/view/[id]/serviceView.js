@@ -5,14 +5,33 @@ import Login from "../../../components/login/page.js";
 import "./page.css";
 import Navbar from "@/app/components/navbar/navbar.js";
 import Footer from "@/app/components/footer/footer.js";
+import { serializeUseCacheCacheStore } from "next/dist/server/resume-data-cache/cache-store.js";
 
 const ServiceView = ({ service }) => {
   const { data: session } = useSession();
   const [loginState, setLoginState] = useState(false);
   const [btnState, setBtnState] = useState(false);
+  const [totalPrice,setTotalPrice] = useState(0);
+  let c=1;
 
   const handleLoginState = () => {
     setLoginState(!loginState);
+  };
+  const [cart, setCart] = useState([]);
+
+  const handleAddService = (subService) => {
+    setCart([...cart, subService]);
+    setTotalPrice(totalPrice + parseInt(subService.price));
+    console.log(cart);
+  };
+
+  const handleDeleteService = (subService) => {
+    setCart(cart.filter((item) => item.title !== subService.title));
+    setTotalPrice(totalPrice - parseInt(subService.price));
+  };
+
+  const checkContains = (subService) => {
+    return cart.some((item) => item.title === subService.title);
   };
 
   useEffect(() => {
@@ -32,7 +51,6 @@ const ServiceView = ({ service }) => {
       {loginState && <Login handleLoginState={handleLoginState} />}
 
       <div className="wholeBody">
-
         <Navbar handleLoginState={handleLoginState} />
 
         <header className="section__container header__container" id="home">
@@ -42,7 +60,7 @@ const ServiceView = ({ service }) => {
           <div className="header__content">
             <div>
               <h1>{service.name}</h1>
-              {!btnState && (
+                <a href="#services" >
                 <button
                   id="first"
                   onClick={() => {
@@ -52,12 +70,8 @@ const ServiceView = ({ service }) => {
                 >
                   Book Service <i className="fa-solid fa-arrow-right"></i>
                 </button>
-              )}
-              {btnState && (
-                <button className="btnAfter">
-                   Ordered !! {"     "}<i className="fa-solid fa-check"></i>
-                </button>
-              )}
+                </a>
+              
             </div>
           </div>
         </header>
@@ -66,8 +80,8 @@ const ServiceView = ({ service }) => {
           <div className="descri">
             <h1>{service.heading}</h1>
             <p>{service.description}</p>
-            { service.subServices.map(ser =>{
-              <li>ser.title</li>
+            {service.subServices.map((ser) => {
+              <li>ser.title</li>;
             })}
           </div>
         </section>
@@ -113,55 +127,107 @@ const ServiceView = ({ service }) => {
               </div>
             </div>
 
-            <div className="box2">
-
-              {service.subServices.map( (subService) => { 
+            <div className="box2" id="services">
+              {service.subServices.map((subService) => {
                 return (
-              <div className="packages-container">
-                <div className="package-card">
-                  <div className="package-details">
-                    <h3>{subService.title}</h3>
-                    <div className="price-time">
-                      <span className="price">₹{subService.price}</span>
-                      <span className="original-price">₹{ subService.price * 1.5}</span>
-                      <span className="time">• 2 hrs</span>
-                    </div>
-                    <div className="view-details">
-                      <a href="#">View details</a>
-                      <div className="details-box">
-                        <p>
-                          {service.description}
-                        </p>
+                  <div className="packages-container">
+                    <div className="package-card">
+                      <div className="package-details">
+                        <h3>{subService.title}</h3>
+                        <div className="price-time">
+                          <span className="price">₹{subService.price}</span>
+                          <span className="original-price">
+                            ₹{subService.price * 1.5}
+                          </span>
+                          <span className="time">• 2 hrs</span>
+                        </div>
+                        <div className="view-details">
+                          <a href="#">View details</a>
+                          <div className="details-box">
+                            <p>{service.description}</p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <button className="add-button">Add</button>
-                </div>
+                      {!checkContains(subService) && (
+                        <button
+                          onClick={() => {
+                            handleAddService(subService);
+                          }}
+                          className="add-button"
+                        >
+                          Add
+                        </button>
+                      )}
 
-                <hr className="divider" />
-              </div>
-              )
+                      {checkContains(subService) && (
+                        <button className="added-button" disabled>
+                          Added
+                        </button>
+                      )}
+                    </div>
+
+                    <hr className="divider" />
+                  </div>
+                );
               })}
             </div>
 
             <div className="box3">
               <div className="className3">
-                <div className="card3">
-                  <i
-                    className="fa-solid fa-cart-shopping"
-                    style={{fontSize:"70px"}}
-                  ></i>
-                  <p className="message3">
-                    {" "}
-                    No items in your cart {" "}
-                  </p>
-                </div>
+                {cart.length == 0 && (
+                  <div className="card3">
+                    <i
+                      className="fa-solid fa-cart-shopping"
+                      style={{ fontSize: "70px" }}
+                    ></i>
+                    <p className="message3"> No items in your cart </p>
+                  </div>
+                )}
+
+                {cart.length != 0 && (
+                  <div className="card3">
+                    <p>
+                      {" "}
+                      <h3>Cart : </h3>{" "}
+                    </p>
+                    {cart.map((item) => (
+                      <div className="del">
+                        <div>
+                          <p>
+                            {c++}. {item.title} &nbsp;₹{item.price}
+                          </p>
+                        </div>
+                        <div>
+                          <i
+                            onClick={() => handleDeleteService(item)}
+                            className="fa-solid fa-trash"
+                          ></i>{" "}
+                        </div>
+                      </div>
+                    ))}
+                    <hr />
+                    <div className="del2">
+                      <p>
+                        Total: &nbsp; &nbsp; ₹{totalPrice}
+                        <button className="add-button1">Pay Now</button>
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="card3">
                   <div className="cashback-content3">
-                    <i className="fa-brands fa-amazon" style={{fontSize: "30px"}} ></i>
+                    <i
+                      className="fa-brands fa-amazon"
+                      style={{ fontSize: "30px" }}
+                    ></i>
                     <div className="cashback-details3">
-                      <p className="cashback-title3">Amazon cashback upto ₹50</p>
-                      <p className="cashback-desc3">Get cashback via Amazon pay</p>
+                      <p className="cashback-title3">
+                        Amazon cashback upto ₹50
+                      </p>
+                      <p className="cashback-desc3">
+                        Get cashback via Amazon pay
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -200,7 +266,6 @@ const ServiceView = ({ service }) => {
         </main>
 
         <Footer />
-        
       </div>
     </>
   );

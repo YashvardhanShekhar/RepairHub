@@ -236,6 +236,7 @@ font-weight: bold;
 }
 
 .package-details h3 {
+  text-align: left;
   font-size: 18px;
   padding-bottom: 1rem;
   color: #333;
@@ -342,6 +343,16 @@ font-weight: bold;
   background-color: #254d4d;
 }
 
+.added-button {
+  background-color: #b3d1d1;
+  color: #ffffff;
+  border: none;
+  margin-top: 2rem;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
 
 .divider {
 border: none;
@@ -383,6 +394,52 @@ margin: 20px 0;
   width: 80px;
   height: 80px;
   margin-bottom: 10px;
+}
+
+.card3 p {
+  color: #555;
+  margin-bottom: 1rem;
+}
+.del{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.del p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.del p:hover{
+  border-radius: 2rem;
+}
+.del i{
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: rgb(179, 174, 174);
+}
+.del2{
+  display: flex;
+  padding-left: 1.5rem;
+}
+.del i:hover{
+  color: #f10909;
+}
+.add-button1{
+  background-color: #366c41;
+  color: #fff;
+  border: none;
+  margin-left: 6rem;
+  margin-top: 2rem;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.add-button1:hover {
+  background-color: #254d4d;
 }
 
 .message3{
@@ -523,23 +580,6 @@ margin: 20px 0;
     border-radius: 1rem;
     border: 3px solid black;
     box-shadow: 5px 5px 20px coral;
-}
-
-.btnAfter{
-  height: 3rem;
-  width: 15rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  top: 2rem;
-  background-color:rgb(22, 180, 22); 
-  font-weight: 500;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 1rem;
-  border: 3px solid black;
-  box-shadow: 5px 5px 20px rgb(56, 170, 56);
 }
 
 .section__container {
