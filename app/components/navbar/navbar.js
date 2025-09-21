@@ -1,15 +1,22 @@
-
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import "./navbar.css";
 
 const navbar = ({ handleLoginState }) => {
-  
   const { data: session } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     await signOut();
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
   return (
@@ -20,41 +27,39 @@ const navbar = ({ handleLoginState }) => {
             <h4> Repair Hub </h4>
           </a>
         </div>
-        <div className="nav__menu__btn" id="menu-btn">
+        <div className="nav__menu__btn" id="menu-btn" onClick={toggleMenu}>
           <i className="ri-menu-line"></i>
         </div>
       </div>
-      <ul className="nav__links" id="nav-links">
+      <ul 
+        className={`nav__links ${isMenuOpen ? 'open' : ''}`} 
+        id="nav-links"
+      >
         <li>
-          <a href="/">
-            {" "}
-            <p> Home </p>{" "}
+          <a href="/" onClick={closeMenu}>
+            <p> Home </p>
           </a>
         </li>
         <li>
-          <a href="/services">
-            {" "}
-            <p> Services </p>{" "}
+          <a href="/services" onClick={closeMenu}>
+            <p> Services </p>
           </a>
         </li>
         <li>
-          <a href="#contact">
-            {" "}
-            <p> Contact </p>{" "}
+          <a href="#contact" onClick={closeMenu}>
+            <p> Contact </p>
           </a>
         </li>
         {session && (
           <li>
-            <a onClick={handleLogout} href="#signout">
-              {" "}
+            <a onClick={() => { handleLogout(); closeMenu(); }} href="#signout">
               <p> Sign Out </p>
             </a>
           </li>
         )}
         {!session && (
           <li>
-            <a onClick={handleLoginState} href="#signin">
-              {" "}
+            <a onClick={() => { handleLoginState(); closeMenu(); }} href="#signin">
               <p> Sign In </p>
             </a>
           </li>
