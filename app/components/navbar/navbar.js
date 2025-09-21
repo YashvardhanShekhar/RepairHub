@@ -28,7 +28,11 @@ const navbar = ({ handleLoginState }) => {
           </a>
         </div>
         <div className="nav__menu__btn" id="menu-btn" onClick={toggleMenu}>
-          <i className="ri-menu-line"></i>
+          {isMenuOpen ? (
+            <i className="ri-close-line"></i>
+          ) : (
+            <i className="ri-menu-line"></i>
+          )}
         </div>
       </div>
       <ul 
